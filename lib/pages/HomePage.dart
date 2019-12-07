@@ -7,10 +7,10 @@ class HomePage extends StatefulWidget { // 有状态组件本体
 }
 
 class _HomePageState extends State<HomePage> { // 有状态组件的状态部分
-  int _counter = 0;
-  String title = 'Flutter 官方实例计数器';
-  void _incrementCounter() {
-    setState(() {
+  int _counter = 0; // 按钮点击次数
+  String title = 'Flutter 官方实例计数器'; // 页面标题
+  void _incrementCounter() { // 点击按钮执行的方法
+    setState(() { // setState 方法将数据的变化实时映射到UI
       _counter++;
     });
   }
