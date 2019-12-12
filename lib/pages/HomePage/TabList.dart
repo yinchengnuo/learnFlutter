@@ -19,11 +19,17 @@ class _TabListState extends State<TabList> {
       body: Wrap(
         children: <Widget>[
           RaisedButton(
+            child: Text('Container组件'),
             onPressed: () {
               Navigator.pushNamed(context, '/container');
             },
-            child: Text('Container组件'),
-          )
+          ),
+          RaisedButton(
+            child: Text('TabController组件'),
+            onPressed: () {
+              Navigator.pushNamed(context, '/tabcontroller');
+            },
+          ),
         ],
       ),
     );

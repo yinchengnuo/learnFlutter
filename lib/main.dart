@@ -17,7 +17,9 @@ class App extends StatelessWidget {
       // home: HomePage(), // 应用默认所显示的界面 <Widget>
       home: HomePage(), // 应用默认所显示的界面 <Widget>
       routes: routes, // 路由表
-      onGenerateRoute: onGenerateRoute, // 全局路由守卫i，用于使用命名路由时传参
+      initialRoute: '/tabcontroller', // 首页路由
+      onGenerateRoute: onGenerateRoute, // 全局路由守卫，用于使用命名路由时传参
+      debugShowCheckedModeBanner: false, // 不显示 debug 图标
     );
   }
 }
