@@ -10,8 +10,15 @@ class HomePage extends StatefulWidget { // 有状态组件本体
 }
 
 class _HomePageState extends State<HomePage> { // 有状态组件的状态部分
-  int _bottomNavigationBarCurrentIndex = 0;
+
+  int _bottomNavigationBarCurrentIndex = 2; // 首页默认 tab 项
   List _bottomNavigationBarCurrentItemsList = <Widget>[TabHome(), TabTabbar(), TabList()];
+  List _bottomNavigationBarItems = <Map>[
+    { 'name': '首页', 'icon': Icon(Icons.home) },
+    { 'name': '切换', 'icon': Icon(Icons.switch_camera) },
+    { 'name': '组件', 'icon': Icon(Icons.list) },
+  ];
+
   @override
   Widget build(BuildContext context) { // 有状态组件的 UI 构建是在有状态组件的状态部分构建的
     return Scaffold( // Scaffold 是 Material 库中提供的页面脚手架，它提供了默认的导航栏、标题和包含主屏幕widget树的body属性等
@@ -23,20 +30,12 @@ class _HomePageState extends State<HomePage> { // 有状态组件的状态部分
             this._bottomNavigationBarCurrentIndex = index;
           });
         },
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('首页')
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.switch_camera),
-            title: Text('切换')
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            title: Text('组件')
-          ),
-        ],
+        items: this._bottomNavigationBarItems.map((item) {
+          return BottomNavigationBarItem(
+            title: Text(item['name']),
+            icon: item['icon']
+          );
+        }).toList(),
       ),
     );
   }

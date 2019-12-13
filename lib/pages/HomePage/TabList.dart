@@ -8,6 +8,13 @@ class TabList extends StatefulWidget {
 }
 
 class _TabListState extends State<TabList> {
+
+  List routerList = <Map> [
+    { 'name': 'Container组件', 'routeName': '/container' },
+    { 'name': 'TabController组件', 'routeName': '/tabcontroller' },
+    { 'name': 'Swiper组件', 'routeName': '/swiper' },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,20 +24,17 @@ class _TabListState extends State<TabList> {
         ),
       ),
       body: Wrap(
-        children: <Widget>[
-          RaisedButton(
-            child: Text('Container组件'),
-            onPressed: () {
-              Navigator.pushNamed(context, '/container');
-            },
-          ),
-          RaisedButton(
-            child: Text('TabController组件'),
-            onPressed: () {
-              Navigator.pushNamed(context, '/tabcontroller');
-            },
-          ),
-        ],
+        children: this.routerList.map((item) {
+          return Container(
+            margin: EdgeInsets.only(left: 10),
+            child: RaisedButton(
+              child: Text(item['name']),
+              onPressed: () {
+                Navigator.pushNamed(context, item['routeName']);
+              },
+            ),
+          );
+        }).toList(),
       ),
     );
   }
