@@ -41,10 +41,12 @@ class _TabTabbarState extends State<TabTabbar> {
             ),
           ],
           bottom: TabBar(
-            isScrollable: true,
-            indicatorColor: Colors.white,
-            indicatorWeight: 3,
-            indicatorSize: TabBarIndicatorSize.label,
+            isScrollable: true, // tabbar 是否滚动
+            indicatorWeight: 3, // 滑动指示器粗细
+            indicatorColor: Colors.white, // 滑动指示器颜色
+            indicatorSize: TabBarIndicatorSize.label, // 滑动指示器宽度
+            labelPadding: EdgeInsets.fromLTRB(23, 0, 23, 0), // label padding
+            indicatorPadding: EdgeInsets.fromLTRB(10, 0, 10, 0), // 滑动指示器 padding
             tabs: this.tabList.map((title) {
               return Tab(
                 child: Text(

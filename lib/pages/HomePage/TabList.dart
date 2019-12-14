@@ -10,9 +10,10 @@ class TabList extends StatefulWidget {
 class _TabListState extends State<TabList> {
 
   List routerList = <Map> [
-    { 'name': 'Container组件', 'routeName': '/container' },
-    { 'name': 'TabController组件', 'routeName': '/tabcontroller' },
     { 'name': 'Swiper组件', 'routeName': '/swiper' },
+    { 'name': 'Container组件', 'routeName': '/container' },
+    { 'name': 'request 网络请求', 'routeName': '/request' },
+    { 'name': 'TabController组件', 'routeName': '/tabcontroller' },
   ];
 
   @override
