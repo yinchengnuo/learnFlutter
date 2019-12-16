@@ -18,6 +18,7 @@ class _RequestPageState extends State<RequestPage> {
     Dio().get("http://yinchengnuo.com/tuijian?page=1").then((onValue) {
       setState(() {
         this._list = onValue.data['info'];
+        print(this._list);
       });
     }).catchError((onError) {
       print(onError);
@@ -47,7 +48,7 @@ class _RequestPageState extends State<RequestPage> {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image:
-                                    NetworkImage(this._list[index]['userpic']),
+                                    NetworkImage(this._list[index]['bgpic']),
                                 fit: BoxFit.cover),
                             borderRadius: BorderRadius.all(Radius.circular(8))),
                         child: Center(
