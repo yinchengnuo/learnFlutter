@@ -5,6 +5,7 @@ import '../pages/SwiperPage/SwiperPage.dart';
 import '../pages/InkWellPage/InkWellPage.dart';
 import '../pages/RequestPage/RequestPage.dart';
 import '../pages/SwitchTheme/SwitchTheme.dart';
+import '../pages/VideoplayPage/VideoplayPage.dart';
 import '../pages/ContainerPage/ContainerPage.dart';
 import '../pages/ScreenEventPage/ScreenEventPage.dart';
 import '../pages/TabControllerPage/TabControllerPage.dart';
@@ -17,6 +18,7 @@ Map routes = <String, WidgetBuilder> { // 路由表
   '/404': (ctx) => UndefinedRoutePage(), // 404 路由未定义页面
   '/switchtheme': (ctx) => SwitchTheme(), // 切换主题 页面
   '/container': (ctx) => ContainerPage(), // container 组件页面
+  '/videoplay': (ctx) => VideoplayPage(), // 视频播放 组件页面
   '/screenevent': (ctx) => ScreenEventPage(), // 事件处理 页面
   '/tabcontroller': (ctx) => TabControllerPage(), // tabcontroller 组件页面
 };

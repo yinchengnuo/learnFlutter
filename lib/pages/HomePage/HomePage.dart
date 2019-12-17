@@ -1,7 +1,7 @@
 import 'TabHome.dart';
 import 'TabList.dart';
 import 'TabTabbar.dart';
-import '../../widgets/ImgIcon.dart';
+import 'TabVideo.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,10 +14,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // 有状态组件的状态部分
 
-  int _bottomNavigationBarCurrentIndex = 2; // 首页默认 tab 项
+  int _bottomNavigationBarCurrentIndex = 0; // 首页默认 tab 项
   List _bottomNavigationBarCurrentItemsList = <Widget>[
     TabHome(),
     TabTabbar(),
+    TabVideo(),
     TabList()
   ];
 
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
 
     final int bottomNavigationBarHeight = 98; // 底部导航栏高度
     final double rpx = MediaQuery.of(context).size.width / 750; // 适配单位宽度
-    final double _bottomNavigationBarItemsIconWidth = 48 * rpx; // Icon 宽
+    final double _bottomNavigationBarItemsIconWidth = 38 * rpx; // Icon 宽
 
     List _bottomNavigationBarItems = <Map>[
       {
@@ -64,8 +65,9 @@ class _HomePageState extends State<HomePage> {
                 height: double.infinity,
                 child: this._bottomNavigationBarCurrentItemsList[
                     this._bottomNavigationBarCurrentIndex],
-                padding:
-                    EdgeInsets.only(bottom: bottomNavigationBarHeight * rpx),
+                padding: this._bottomNavigationBarCurrentIndex == 2
+                    ? EdgeInsets.only(bottom: 0)
+                    : EdgeInsets.only(bottom: bottomNavigationBarHeight * rpx),
               ),
               Align(
                 alignment: Alignment.bottomCenter,
@@ -79,6 +81,7 @@ class _HomePageState extends State<HomePage> {
                     children: _bottomNavigationBarItems.map((item) {
                       return Expanded(
                         child: InkWell(
+                          onTapDown: (d) {},
                           onTap: () {
                             setState(() {
                               _bottomNavigationBarCurrentIndex =
@@ -94,15 +97,24 @@ class _HomePageState extends State<HomePage> {
                                     ? AssetImage(item['selectedIcon'])
                                     : AssetImage(item['icon']),
                                 size: _bottomNavigationBarItemsIconWidth,
-                                color:
-                                    _bottomNavigationBarItems.indexOf(item) ==
-                                            _bottomNavigationBarCurrentIndex
-                                        ? Theme.of(context).accentColor
-                                        : Colors.black45,
+                                color: _bottomNavigationBarItems
+                                            .indexOf(item) ==
+                                        _bottomNavigationBarCurrentIndex
+                                    ? Theme.of(context).accentColor
+                                    : Theme.of(context).textTheme.button.color,
                               ),
                               Text(
                                 item['name'],
-                                style: TextStyle(fontSize: 22 * rpx),
+                                style: TextStyle(
+                                    fontSize: 22 * rpx,
+                                    color: _bottomNavigationBarItems
+                                                .indexOf(item) ==
+                                            _bottomNavigationBarCurrentIndex
+                                        ? Theme.of(context).accentColor
+                                        : Theme.of(context)
+                                            .textTheme
+                                            .button
+                                            .color),
                               )
                             ],
                           ),

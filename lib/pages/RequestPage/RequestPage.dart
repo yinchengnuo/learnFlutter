@@ -18,11 +18,11 @@ class _RequestPageState extends State<RequestPage> {
     Dio().get("http://yinchengnuo.com/tuijian?page=1").then((onValue) {
       setState(() {
         this._list = onValue.data['info'];
-        print(this._list);
       });
     }).catchError((onError) {
       print(onError);
     });
+    
   }
 
   @override
