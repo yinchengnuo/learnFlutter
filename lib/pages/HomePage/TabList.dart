@@ -14,6 +14,7 @@ class _TabListState extends State<TabList> {
     {'name': 'inkwell 组件', 'routeName': '/inkwell'},
     {'name': '手势事件', 'routeName': '/screenevent'},
     {'name': '切换主题', 'routeName': '/switchtheme'},
+    {'name': 'pageview 组件', 'routeName': '/pageview'},
     {'name': '视频播放 组件', 'routeName': '/videoplay'},
     {'name': 'request 网络请求', 'routeName': '/request'},
     {'name': 'Container 组件', 'routeName': '/container'},

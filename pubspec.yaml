@@ -22,7 +22,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_swiper : ^1.1.6
-  video_player: ^0.10.5
+  video_player: ^0.9.0
   dio: ^3.0.7
 
   # The following adds the Cupertino Icons font to your application.
@@ -53,6 +53,7 @@ flutter:
     - lib/images/homepage/video-fill.png
     - lib/images/homepage/list.png
     - lib/images/homepage/list-fill.png
+    - lib/images/placeholder/douyin.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

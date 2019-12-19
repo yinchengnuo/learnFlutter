@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // 有状态组件的状态部分
 
-  int _bottomNavigationBarCurrentIndex = 0; // 首页默认 tab 项
+  int _pageViewIndex = 0; // 首页默认 tab 项
   List _bottomNavigationBarCurrentItemsList = <Widget>[
     TabHome(),
     TabTabbar(),
@@ -32,22 +32,22 @@ class _HomePageState extends State<HomePage> {
 
     List _bottomNavigationBarItems = <Map>[
       {
-        'name': '首页',
+        'title': '首页',
         'icon': 'lib/images/homepage/home.png',
         'selectedIcon': 'lib/images/homepage/home-fill.png',
       },
       {
-        'name': '直播',
+        'title': '直播',
         'icon': 'lib/images/homepage/live.png',
         'selectedIcon': 'lib/images/homepage/live-fill.png'
       },
       {
-        'name': '小视频',
+        'title': '小视频',
         'icon': 'lib/images/homepage/video.png',
         'selectedIcon': 'lib/images/homepage/video-fill.png',
       },
       {
-        'name': '组件列表',
+        'title': '组件列表',
         'icon': 'lib/images/homepage/list.png',
         'selectedIcon': 'lib/images/homepage/list-fill.png',
       }
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       // Scaffold 是 Material 库中提供的页面脚手架，它提供了默认的导航栏、标题和包含主屏幕widget树的body属性等
-      // body: this._bottomNavigationBarCurrentItemsList[this._bottomNavigationBarCurrentIndex], // 页面内容部分
+      // body: this._bottomNavigationBarCurrentItemsList[this._pageViewIndex], // 页面内容部分
       body: Builder(
         builder: (BuildContext context) {
           return Stack(
@@ -64,8 +64,8 @@ class _HomePageState extends State<HomePage> {
                 width: double.infinity,
                 height: double.infinity,
                 child: this._bottomNavigationBarCurrentItemsList[
-                    this._bottomNavigationBarCurrentIndex],
-                padding: this._bottomNavigationBarCurrentIndex == 2
+                    this._pageViewIndex],
+                padding: this._pageViewIndex == 2
                     ? EdgeInsets.only(bottom: 0)
                     : EdgeInsets.only(bottom: bottomNavigationBarHeight * rpx),
               ),
@@ -78,87 +78,59 @@ class _HomePageState extends State<HomePage> {
                           top: BorderSide(
                               width: 1 * rpx, color: Colors.black45))),
                   child: Row(
-                    children: _bottomNavigationBarItems.map((item) {
-                      return Expanded(
-                        child: InkWell(
-                          onTapDown: (d) {},
-                          onTap: () {
-                            setState(() {
-                              _bottomNavigationBarCurrentIndex =
-                                  _bottomNavigationBarItems.indexOf(item);
-                            });
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              ImageIcon(
-                                _bottomNavigationBarItems.indexOf(item) ==
-                                        _bottomNavigationBarCurrentIndex
-                                    ? AssetImage(item['selectedIcon'])
-                                    : AssetImage(item['icon']),
-                                size: _bottomNavigationBarItemsIconWidth,
-                                color: _bottomNavigationBarItems
-                                            .indexOf(item) ==
-                                        _bottomNavigationBarCurrentIndex
-                                    ? Theme.of(context).accentColor
-                                    : Theme.of(context).textTheme.button.color,
+                    children: _bottomNavigationBarItems
+                        .map((item) => Expanded(
+                              child: InkWell(
+                                onTapDown: (d) {},
+                                onTap: () {
+                                  setState(() {
+                                    _pageViewIndex =
+                                        _bottomNavigationBarItems.indexOf(item);
+                                  });
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    ImageIcon(
+                                      _bottomNavigationBarItems.indexOf(item) ==
+                                              _pageViewIndex
+                                          ? AssetImage(item['selectedIcon'])
+                                          : AssetImage(item['icon']),
+                                      size: _bottomNavigationBarItemsIconWidth,
+                                      color: _bottomNavigationBarItems
+                                                  .indexOf(item) ==
+                                              _pageViewIndex
+                                          ? Theme.of(context).accentColor
+                                          : Theme.of(context)
+                                              .textTheme
+                                              .button
+                                              .color,
+                                    ),
+                                    Text(
+                                      item['title'],
+                                      style: TextStyle(
+                                          fontSize: 22 * rpx,
+                                          color: _bottomNavigationBarItems
+                                                      .indexOf(item) ==
+                                                  _pageViewIndex
+                                              ? Theme.of(context).accentColor
+                                              : Theme.of(context)
+                                                  .textTheme
+                                                  .button
+                                                  .color),
+                                    )
+                                  ],
+                                ),
                               ),
-                              Text(
-                                item['name'],
-                                style: TextStyle(
-                                    fontSize: 22 * rpx,
-                                    color: _bottomNavigationBarItems
-                                                .indexOf(item) ==
-                                            _bottomNavigationBarCurrentIndex
-                                        ? Theme.of(context).accentColor
-                                        : Theme.of(context)
-                                            .textTheme
-                                            .button
-                                            .color),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    }).toList(),
+                            ))
+                        .toList(),
                   ),
                 ),
-                // child: BottomNavigationBar(
-                //   backgroundColor: Colors.transparent,
-                //   elevation: 0,
-                //   // 底部导航栏
-                //   currentIndex: this._bottomNavigationBarCurrentIndex,
-                //   onTap: (index) {
-                //     setState(() {
-                //       this._bottomNavigationBarCurrentIndex = index;
-                //     });
-                //   },
-                //   items: this._bottomNavigationBarItems.map((item) {
-                //     return BottomNavigationBarItem(
-                //         title: Text(item['name']), icon: item['icon']);
-                //   }).toList(),
-                // ),
               )
             ],
           );
         },
-      ), // 页面内容部分
-      // bottomNavigationBar: Container(
-      //   height: 56,
-      //   child: BottomNavigationBar(
-      //     // 底部导航栏
-      //     currentIndex: this._bottomNavigationBarCurrentIndex,
-      //     onTap: (index) {
-      //       setState(() {
-      //         this._bottomNavigationBarCurrentIndex = index;
-      //       });
-      //     },
-      //     items: this._bottomNavigationBarItems.map((item) {
-      //       return BottomNavigationBarItem(
-      //           title: Text(item['name']), icon: item['icon']);
-      //     }).toList(),
-      //   ),
-      // ),
+      ),
     );
   }
 }

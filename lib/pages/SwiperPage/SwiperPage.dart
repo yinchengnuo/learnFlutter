@@ -36,6 +36,7 @@ class _SwiperPageState extends State<SwiperPage> {
         ),
         body: Swiper(
           itemBuilder: (BuildContext context, int index) {
+            precacheImage(NetworkImage(this._swiperItem[index]['imageURL']), context);
             return Image.network(this._swiperItem[index]['imageURL'],
                 fit: BoxFit.fill);
           },
