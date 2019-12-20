@@ -23,6 +23,7 @@ dependencies:
     sdk: flutter
   flutter_swiper : ^1.1.6
   video_player: ^0.9.0
+  provider: ^3.2.0
   dio: ^3.0.7
 
   # The following adds the Cupertino Icons font to your application.
@@ -45,14 +46,14 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - lib/images/homepage/home.png
-    - lib/images/homepage/home-fill.png
-    - lib/images/homepage/live.png
-    - lib/images/homepage/live-fill.png
-    - lib/images/homepage/video.png
-    - lib/images/homepage/video-fill.png
-    - lib/images/homepage/list.png
-    - lib/images/homepage/list-fill.png
+    - lib/images/pagehome/home.png
+    - lib/images/pagehome/home-fill.png
+    - lib/images/pagehome/live.png
+    - lib/images/pagehome/live-fill.png
+    - lib/images/pagehome/video.png
+    - lib/images/pagehome/video-fill.png
+    - lib/images/pagehome/list.png
+    - lib/images/pagehome/list-fill.png
     - lib/images/placeholder/douyin.jpg
 
   # To add assets to your application, add an assets section, like this:
