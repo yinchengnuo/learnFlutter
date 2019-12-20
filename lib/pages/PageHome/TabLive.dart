@@ -15,6 +15,8 @@ class _TabLiveState extends State<TabLive> with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    
     return DefaultTabController(
       length: this.tabList.length,
       child: Scaffold(
@@ -48,8 +50,7 @@ class _TabLiveState extends State<TabLive> with AutomaticKeepAliveClientMixin {
             indicatorColor: Colors.white, // 滑动指示器颜色
             indicatorSize: TabBarIndicatorSize.label, // 滑动指示器宽度
             labelPadding: EdgeInsets.fromLTRB(23, 0, 23, 0), // label padding
-            indicatorPadding:
-                EdgeInsets.fromLTRB(10, 0, 10, 0), // 滑动指示器 padding
+            indicatorPadding: EdgeInsets.fromLTRB(10, 0, 10, 0), // 滑动指示器 padding
             tabs: this.tabList.map((title) {
               return Tab(
                 child: Text(

@@ -10,10 +10,11 @@ class Tab2 extends StatefulWidget {
 }
 
 class _Tab2State extends State<Tab2> with AutomaticKeepAliveClientMixin {
+  ProviderDevice _$device;
   int _counter = 0;
   void _incrementCounter() {
     setState(() => this._counter++);
-    Provider.of<ProviderDevice>(context).add();
+    this._$device.add();
   }
 
   @override
@@ -22,28 +23,39 @@ class _Tab2State extends State<Tab2> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              alignment: Alignment(0, 0),
-              child: Text(
-                this._counter.toString(),
-                style: TextStyle(fontSize: 123),
-              ),
-            ),
-            Container(
-              alignment: Alignment(0, 0),
-              child: Text(
-                'total: ${Provider.of<ProviderDevice>(context).total.toString()}',
-                style: TextStyle(fontSize: 56),
-              ),
-            ),
-          ]),
+      appBar: AppBar(
+        title: Text('频道'),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+      ),
+      body: Consumer<ProviderDevice>(
+        builder: (BuildContext context, ProviderDevice device, _) {
+          this._$device = device;
+          return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  alignment: Alignment(0, 0),
+                  child: Text(
+                    this._counter.toString(),
+                    style: TextStyle(fontSize: 123),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment(0, 0),
+                  child: Text(
+                    'total: ${this._$device.total.toString()}',
+                    style: TextStyle(fontSize: 56),
+                  ),
+                ),
+              ]);
+        },
+      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: this._incrementCounter,
         tooltip: '加数器',
         child: Icon(Icons.add),
+        heroTag: 'providerpage2',
+        onPressed: this._incrementCounter,
       ),
     );
   }

@@ -5,6 +5,7 @@ class ProviderDevice with ChangeNotifier {
 
   add() {
     this.total += 1;
+    notifyListeners();
   }
 
   clear() {

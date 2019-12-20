@@ -10,8 +10,6 @@ import 'router/onUnknownRoute.dart';
 import 'router/onGenerateRoute.dart';
 import 'router/navigatorObservers.dart';
 
-import 'pages/PageHome/PageHome.dart';
-
 void main() => runApp(App());
 
 class App extends StatefulWidget {
@@ -38,7 +36,6 @@ class _AppState extends State<App> {
           primarySwatch: Colors.blue,
         ),
         // home: HomePage(), // 应用默认所显示的界面 <Widget>
-        home: PageHome(), // 应用默认所显示的界面 <Widget>
         routes: routes, // 路由表
         initialRoute: '/', // 首页路由
         onUnknownRoute: onUnknownRoute, // 未知路由处理方法

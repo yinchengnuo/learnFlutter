@@ -15,45 +15,66 @@ class PageProvider extends StatefulWidget {
 }
 
 class _PageProviderState extends State<PageProvider> {
-  List<Widget> _pageList = [
-    Tab1(),
-    Tab2(),
-    Tab3(),
-    Tab4(),
-  ];
+  ProviderApp _$app;
+  ProviderDevice _$device;
+
+  List<Widget> _pageList = [Tab1(), Tab2(), Tab3(), Tab4()];
   PageController _pageController = PageController();
 
   @override
-  Widget build(BuildContext context) {
-    Provider.of<ProviderDevice>(this.context).clear();
+  void dispose() {
+    super.dispose();
+    // 组件销毁后，通知 provider 清除数据
+    this._$device.clear();
+    this._$app.switchPageProviderTabIndex(0, notify: false);
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Provider 状态管理'),
       ),
-      body: PageView(
-        children: this._pageList,
-        controller: this._pageController,
-        physics: NeverScrollableScrollPhysics(),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: Provider.of<ProviderApp>(context).pageProviderTabIndex,
-        onTap: (index) {
-          this._pageController.jumpToPage(index);
-          setState(() {
-            Provider.of<ProviderApp>(context).switchPageProviderTabIndex(index);
-          });
+      body: Consumer2<ProviderApp, ProviderDevice>(
+        builder: (BuildContext context, ProviderApp _$app, ProviderDevice _$device, Widget child) {
+          this._$app = _$app;
+          this._$device = _$device;
+          return PageView(
+            children: this._pageList,
+            controller: this._pageController,
+            physics: NeverScrollableScrollPhysics(),
+          );
         },
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.change_history), title: Text('频道')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.fast_forward), title: Text('动态')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.battery_alert), title: Text('周边')),
-        ],
+      ),
+      bottomNavigationBar: Consumer<ProviderApp>(
+        builder: (BuildContext context, ProviderApp _$app, Widget child) {
+          return BottomNavigationBar(
+            currentIndex: _$app.pageProviderTabIndex,
+            onTap: (index) {
+              this._pageController.jumpToPage(index);
+              _$app.switchPageProviderTabIndex(index);
+            },
+            type: BottomNavigationBarType.fixed,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                title: Text('首页'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.change_history),
+                title: Text('频道'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.fast_forward),
+                title: Text('动态'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.battery_alert),
+                title: Text('周边'),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

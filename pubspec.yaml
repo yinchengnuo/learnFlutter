@@ -52,8 +52,8 @@ flutter:
     - lib/images/pagehome/live-fill.png
     - lib/images/pagehome/video.png
     - lib/images/pagehome/video-fill.png
-    - lib/images/pagehome/list.png
-    - lib/images/pagehome/list-fill.png
+    - lib/images/pagehome/widget.png
+    - lib/images/pagehome/widget-fill.png
     - lib/images/placeholder/douyin.jpg
 
   # To add assets to your application, add an assets section, like this:

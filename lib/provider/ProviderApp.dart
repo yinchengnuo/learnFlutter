@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 
 class ProviderApp with ChangeNotifier {
-  int pageHomeTabIndex = 0;
-  int pageProviderTabIndex = 0;
-
   final int pageHomeTabHeight = 98;
 
+  int _pageHomeTabIndex = 0;
+  int _pageProviderTabIndex = 0;
+
+  int get pageHomeTabIndex => this._pageHomeTabIndex;
+  int get pageProviderTabIndex => this._pageProviderTabIndex;
+
   switchPageHomeTabIndex(index) {
-    this.pageHomeTabIndex = index;
+    this._pageHomeTabIndex = index;
+    notifyListeners();
   }
 
-  switchPageProviderTabIndex(index) {
-    this.pageProviderTabIndex = index;
+  switchPageProviderTabIndex(index, {notify: true}) {
+    this._pageProviderTabIndex = index;
+    if (notify) notifyListeners();
   }
 }

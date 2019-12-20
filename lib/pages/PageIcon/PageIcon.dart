@@ -8,10 +8,6 @@ class PageIcon extends StatefulWidget {
 }
 
 class _PageIconState extends State<PageIcon> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,42 +20,42 @@ class _PageIconState extends State<PageIcon> {
         crossAxisCount: 12,
         children: <Widget>[
           ImageIcon(
-            AssetImage('lib/images/homepage/home.png'),
+            AssetImage('lib/images/pagehome/home.png'),
             size: 56,
             color: Colors.black45,
           ),
           ImageIcon(
-            AssetImage('lib/images/homepage/home-fill.png'),
+            AssetImage('lib/images/pagehome/home-fill.png'),
             size: 56,
             color: Theme.of(context).accentColor,
           ),
           ImageIcon(
-            AssetImage('lib/images/homepage/live.png'),
+            AssetImage('lib/images/pagehome/live.png'),
             size: 56,
             color: Colors.black45,
           ),
           ImageIcon(
-            AssetImage('lib/images/homepage/live-fill.png'),
+            AssetImage('lib/images/pagehome/live-fill.png'),
             size: 56,
             color: Theme.of(context).accentColor,
           ),
           ImageIcon(
-            AssetImage('lib/images/homepage/video.png'),
+            AssetImage('lib/images/pagehome/video.png'),
             size: 56,
             color: Colors.black45,
           ),
           ImageIcon(
-            AssetImage('lib/images/homepage/video-fill.png'),
+            AssetImage('lib/images/pagehome/video-fill.png'),
             size: 56,
             color: Theme.of(context).accentColor,
           ),
           ImageIcon(
-            AssetImage('lib/images/homepage/list.png'),
+            AssetImage('lib/images/pagehome/widget.png'),
             size: 56,
             color: Colors.black45,
           ),
           ImageIcon(
-            AssetImage('lib/images/homepage/list-fill.png'),
+            AssetImage('lib/images/pagehome/widget-fill.png'),
             size: 56,
             color: Theme.of(context).accentColor,
           ),
