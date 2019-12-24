@@ -54,7 +54,7 @@ class _TabHomeState extends State<TabHome> with AutomaticKeepAliveClientMixin {
         elevation: 0,
         color: Colors.black12,
         shape: CircularNotchedRectangle(),
-        child: Container(height: ProviderApp().pageHomeTabHeight * 2 * rpx),
+        child: Container(height: ProviderApp().pageHomeTabHeight * 3 * rpx),
       ),
     );
   }

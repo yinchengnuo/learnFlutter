@@ -9,18 +9,18 @@ class Tabwidgets extends StatefulWidget {
 
 class _TabwidgetsState extends State<Tabwidgets> with AutomaticKeepAliveClientMixin {
   final List<Map> routerList = [
-    {'name': 'Icon 组件', 'routeName': '/icon'},
-    {'name': '动画', 'routeName': '/animation'},
-    {'name': 'Swiper 组件', 'routeName': '/swiper'},
-    {'name': '手势事件', 'routeName': '/screenevent'},
-    {'name': '切换主题', 'routeName': '/switchtheme'},
-    {'name': 'inkwell 组件', 'routeName': '/inkwell'},
-    {'name': 'pageview 组件', 'routeName': '/pageview'},
-    {'name': '视频播放 组件', 'routeName': '/videoplay'},
-    {'name': 'request 网络请求', 'routeName': '/request'},
-    {'name': 'Container 组件', 'routeName': '/container'},
-    {'name': 'provider 状态管理', 'routeName': '/provider'},
-    {'name': 'TabController 组件', 'routeName': '/tabcontroller'},
+    {'name': 'Icon 图标', 'routeName': '/icon'},
+    {'name': 'Stream 流', 'routeName': '/stream'},
+    {'name': 'Dio 网络请求', 'routeName': '/request'},
+    {'name': 'Swiper 轮播图', 'routeName': '/swiper'},
+    {'name': 'Inkwell 水波纹', 'routeName': '/inkwell'},
+    {'name': 'Video 视频播放', 'routeName': '/videoplay'},
+    {'name': 'Container 容器', 'routeName': '/container'},
+    {'name': 'Animation 动画', 'routeName': '/animation'},
+    {'name': 'Pageview 页面容器', 'routeName': '/pageview'},
+    {'name': 'Provider 状态管理', 'routeName': '/provider'},
+    {'name': 'Theme 切换主题', 'routeName': '/switchtheme'},
+    {'name': 'Listener 手势事件', 'routeName': '/screenevent'},
   ];
 
   @override

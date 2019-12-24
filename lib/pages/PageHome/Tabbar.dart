@@ -23,7 +23,7 @@ class Tabbar extends StatelessWidget {
       'selectedIcon': 'lib/images/pagehome/video-fill.png',
     },
     {
-      'title': '组件列表',
+      'title': 'Widgets',
       'icon': 'lib/images/pagehome/widget.png',
       'selectedIcon': 'lib/images/pagehome/widget-fill.png',
     }

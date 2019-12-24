@@ -35,9 +35,8 @@ class _AppState extends State<App> {
           // 应用各种 UI 所使用的主题颜色
           primarySwatch: Colors.blue,
         ),
-        // home: HomePage(), // 应用默认所显示的界面 <Widget>
         routes: routes, // 路由表
-        initialRoute: '/', // 首页路由
+        initialRoute: '/stream', // 首页路由
         onUnknownRoute: onUnknownRoute, // 未知路由处理方法
         onGenerateRoute: onGenerateRoute, // 全局路由守卫，用于使用命名路由时传参
         debugShowCheckedModeBanner: false, // 不显示 debug 图标

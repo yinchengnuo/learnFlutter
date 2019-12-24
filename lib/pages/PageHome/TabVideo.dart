@@ -25,7 +25,7 @@ class _TabVideoState extends State<TabVideo> with AutomaticKeepAliveClientMixin 
   // swiper 活动 index
   int _swiperActiveIndex = 0;
   // swiper 控制器
-  final _swpierController = PageController(
+  final PageController _swpierController = PageController(
     initialPage: 0,
     viewportFraction: 0.999999999,
   );
@@ -35,16 +35,16 @@ class _TabVideoState extends State<TabVideo> with AutomaticKeepAliveClientMixin 
     this._videoController = VideoPlayerController.network(this._swiperItems[this._swiperNowIndex]['url']);
     this._videoController.setLooping(true);
     // 自动切换视频
-    // this._videoController.addListener(() {
-    //   this._videoValue = this._videoController.value;
-    //   this._videoController.position.then((onValue) {
-    //     if (this._videoValue.duration.toString().split('.')[0] == onValue.toString().split('.')[0]) {
-    //       this._swiperNowIndex++;
-    //       this._swiperActiveIndex++;
-    //       this._swpierController.animateToPage(this._swiperNowIndex, duration: Duration(milliseconds: 567), curve: Curves.linear).then((_) {});
-    //     }
-    //   });
-    // });
+    this._videoController.addListener(() {
+      this._videoValue = this._videoController.value;
+      this._videoController.position.then((onValue) {
+        if (this._videoValue.duration.toString().split('.')[0] == onValue.toString().split('.')[0]) {
+          this._swiperNowIndex++;
+          this._swiperActiveIndex++;
+          this._swpierController.animateToPage(this._swiperNowIndex, duration: Duration(milliseconds: 567), curve: Curves.linear).then((_) {});
+        }
+      });
+    });
 
     this._videoController.addListener(() {});
     this._videoController.initialize().then((_) {
