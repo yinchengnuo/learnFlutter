@@ -11,6 +11,7 @@ class _TabwidgetsState extends State<Tabwidgets> with AutomaticKeepAliveClientMi
   final List<Map> routerList = [
     {'name': 'Icon 图标', 'routeName': '/icon'},
     {'name': 'Stream 流', 'routeName': '/stream'},
+    {'name': 'Camera 相机', 'routeName': '/camera'},
     {'name': 'Dio 网络请求', 'routeName': '/request'},
     {'name': 'Swiper 轮播图', 'routeName': '/swiper'},
     {'name': 'Timer 定时器', 'routeName': '/timeout'},
