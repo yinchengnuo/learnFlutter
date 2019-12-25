@@ -13,6 +13,7 @@ class _TabwidgetsState extends State<Tabwidgets> with AutomaticKeepAliveClientMi
     {'name': 'Stream 流', 'routeName': '/stream'},
     {'name': 'Dio 网络请求', 'routeName': '/request'},
     {'name': 'Swiper 轮播图', 'routeName': '/swiper'},
+    {'name': 'Timer 定时器', 'routeName': '/timeout'},
     {'name': 'Inkwell 水波纹', 'routeName': '/inkwell'},
     {'name': 'Video 视频播放', 'routeName': '/videoplay'},
     {'name': 'Container 容器', 'routeName': '/container'},

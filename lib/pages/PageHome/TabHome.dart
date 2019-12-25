@@ -21,7 +21,6 @@ class _TabHomeState extends State<TabHome> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
     final double rpx = MediaQuery.of(context).size.width / 750;
     
     return Scaffold(
@@ -50,11 +49,14 @@ class _TabHomeState extends State<TabHome> with AutomaticKeepAliveClientMixin {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.only(bottom: ProviderApp().pageHomeTabHeight * rpx),
+        child: BottomAppBar(
         elevation: 0,
         color: Colors.black12,
         shape: CircularNotchedRectangle(),
-        child: Container(height: ProviderApp().pageHomeTabHeight * 3 * rpx),
+        child: Container(height: ProviderApp().pageHomeTabHeight * rpx),
+      ),
       ),
     );
   }

@@ -6,6 +6,7 @@ import '../pages/PageSwiper/PageSwiper.dart';
 import '../pages/PageStream/PageStream.dart';
 import '../pages/PageInkWell/PageInkWell.dart';
 import '../pages/PageRequest/PageRequest.dart';
+import '../pages/PageTimeout/PageTimeout.dart';
 import '../pages/PageProvider/PageProvider.dart';
 import '../pages/PagePageview/PagePageview.dart';
 import '../pages/PageAnimation/PageAnimation.dart';
@@ -20,6 +21,7 @@ Map routes = <String, WidgetBuilder> { // 路由表
   '/icon': (ctx) => PageIcon(), // icon 组件页面
   '/swiper': (ctx) => PageSwiper(), // tabcontroller 组件页面
   '/stream': (ctx) => PageStream(), // 流 页面
+  '/timeout': (ctx) => PageTimeout(), // 定时器 页面
   '/request': (ctx) => PageRequest(), // request 网络请求页面
   '/inkwell': (ctx) => PageInkWell(), // inkwell 组件页面
   '/pageview': (ctx) => PagePageview(), // pgeeview 组件页面
