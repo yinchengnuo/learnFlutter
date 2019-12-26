@@ -47,8 +47,8 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Can I use the camera please?</string>
+	<string>系统将使用您的相机进行照片/视频拍摄?</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Can I use the mic please?</string>
+	<string>系统将使用您的麦克风进行音频录制?</string>
 </dict>
 </plist>

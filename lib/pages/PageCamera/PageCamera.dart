@@ -24,9 +24,6 @@ class _PageCameraState extends State<PageCamera> {
     this.initCamera().then((_) {
       controller = CameraController(cameras[0], ResolutionPreset.veryHigh);
       controller.initialize().then((_) {
-        if (!mounted) {
-          return;
-        }
         setState(() {});
       });
     });
@@ -43,10 +40,24 @@ class _PageCameraState extends State<PageCamera> {
     return Scaffold(
       appBar: AppBar(
         title: Text('相机'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.sync),
+            onPressed: () {
+              controller = CameraController(cameras[1], ResolutionPreset.veryHigh);
+              controller.initialize().then((_) {
+                setState(() {});
+              });
+            },
+          )
+        ],
       ),
       body: Center(
-        child: !controller.value.isInitialized
-            ? Container()
+        child: controller == null || !controller.value.isInitialized
+            ? Container(
+                alignment: Alignment(0, 0),
+                child: CircularProgressIndicator(),
+              )
             : CameraPreview(controller),
       ),
     );
