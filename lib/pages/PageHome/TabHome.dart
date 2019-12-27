@@ -16,13 +16,12 @@ class _TabHomeState extends State<TabHome> with AutomaticKeepAliveClientMixin {
 
   @override
   bool get wantKeepAlive => true;
-  
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     final double rpx = MediaQuery.of(context).size.width / 750;
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Flutter 官方实例计数器'),
@@ -38,13 +37,12 @@ class _TabHomeState extends State<TabHome> with AutomaticKeepAliveClientMixin {
         ),
       ),
       floatingActionButton: Container(
-        width: 88,
-        height: 88,
+        width: 66,
+        height: 66,
         margin: EdgeInsets.all(4),
         child: FloatingActionButton(
           elevation: 0,
           onPressed: this._incrementCounter,
-          tooltip: '加数器',
           child: Icon(Icons.add, size: 56),
         ),
       ),
@@ -52,11 +50,11 @@ class _TabHomeState extends State<TabHome> with AutomaticKeepAliveClientMixin {
       bottomNavigationBar: Container(
         margin: EdgeInsets.only(bottom: ProviderApp().pageHomeTabHeight * rpx),
         child: BottomAppBar(
-        elevation: 0,
-        color: Colors.black12,
-        shape: CircularNotchedRectangle(),
-        child: Container(height: ProviderApp().pageHomeTabHeight * rpx),
-      ),
+          elevation: 0,
+          color: Colors.pink[200],
+          shape: CircularNotchedRectangle(),
+          child: Container(height: ProviderApp().pageHomeTabHeight * rpx),
+        ),
       ),
     );
   }

@@ -36,7 +36,7 @@ class _AppState extends State<App> {
           primarySwatch: Colors.blue,
         ),
         routes: routes, // 路由表
-        initialRoute: '/camera', // 首页路由
+        initialRoute: '/flow', // 首页路由
         onUnknownRoute: onUnknownRoute, // 未知路由处理方法
         onGenerateRoute: onGenerateRoute, // 全局路由守卫，用于使用命名路由时传参
         debugShowCheckedModeBanner: false, // 不显示 debug 图标

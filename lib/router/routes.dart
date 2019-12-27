@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../pages/PageHome/PageHome.dart';
 import '../pages/Page404/Page404.dart';
 import '../pages/PageIcon/PageIcon.dart';
+import '../pages/PageFlow/PageFlow.dart';
 import '../pages/PageCamera/PageCamera.dart';
 import '../pages/PageSwiper/PageSwiper.dart';
 import '../pages/PageStream/PageStream.dart';
@@ -20,6 +21,7 @@ Map routes = <String, WidgetBuilder> { // 路由表
   '/': (ctx) => PageHome(), // app 主页
   '/404': (ctx) => Page404(), // 404 路由未定义页面
   '/icon': (ctx) => PageIcon(), // icon 组件页面
+  '/flow': (ctx) => PageFlow(), // 瀑布流 页面
   '/camera': (ctx) => PageCamera(), //相机 页面
   '/swiper': (ctx) => PageSwiper(), // tabcontroller 组件页面
   '/stream': (ctx) => PageStream(), // 流 页面

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../provider/ProviderApp.dart';
 
 class Tabwidgets extends StatefulWidget {
   Tabwidgets({Key key}) : super(key: key);
@@ -10,6 +11,7 @@ class Tabwidgets extends StatefulWidget {
 class _TabwidgetsState extends State<Tabwidgets> with AutomaticKeepAliveClientMixin {
   final List<Map> routerList = [
     {'name': 'Icon 图标', 'routeName': '/icon'},
+    {'name': 'Flow 瀑布流', 'routeName': '/flow'},
     {'name': 'Stream 流', 'routeName': '/stream'},
     {'name': 'Camera 相机', 'routeName': '/camera'},
     {'name': 'Dio 网络请求', 'routeName': '/request'},
@@ -41,19 +43,22 @@ class _TabwidgetsState extends State<Tabwidgets> with AutomaticKeepAliveClientMi
         ),
         preferredSize: Size.fromHeight(128 * rpx),
       ),
-      body: Wrap(
-        children: this.routerList.map((item) {
-          return Container(
-            margin: EdgeInsets.only(left: 10),
-            child: RaisedButton(
-              child: Text(item['name']),
-              onPressed: () {
-                Navigator.pushNamed(context, item['routeName']);
-              },
-            ),
-          );
-        }).toList(),
+      body: SingleChildScrollView(
+        child: Wrap(
+          children: this.routerList.map((item) {
+            return Container(
+              margin: EdgeInsets.only(left: 10),
+              child: RaisedButton(
+                child: Text(item['name']),
+                onPressed: () {
+                  Navigator.pushNamed(context, item['routeName']);
+                },
+              ),
+            );
+          }).toList(),
+        ),
       ),
+      bottomNavigationBar: Container(height: ProviderApp().pageHomeTabHeight * rpx),
     );
   }
 }

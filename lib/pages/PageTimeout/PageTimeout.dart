@@ -11,7 +11,13 @@ class PageTimeout extends StatefulWidget {
 
 class _PageTimeoutState extends State<PageTimeout> {
   Timer _timer;
-  String _status;
+  String _status = DateTime.now().toString();
+
+  @override
+  void dispose() {
+    super.dispose();
+    this._timer.cancel();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +33,6 @@ class _PageTimeoutState extends State<PageTimeout> {
             RaisedButton(
               child: Text('开始'),
               onPressed: () {
-                print(DateTime.now().toString());
                 Timer.periodic(Duration(milliseconds: 1), (timer) {
                   this._timer = timer;
                   setState(() {

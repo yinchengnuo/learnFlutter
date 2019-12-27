@@ -10,6 +10,7 @@ class PageCamera extends StatefulWidget {
 }
 
 class _PageCameraState extends State<PageCamera> {
+  int _cameraIndex = 0;
   List<CameraDescription> cameras;
 
   CameraController controller;
@@ -22,7 +23,7 @@ class _PageCameraState extends State<PageCamera> {
   void initState() {
     super.initState();
     this.initCamera().then((_) {
-      controller = CameraController(cameras[0], ResolutionPreset.veryHigh);
+      controller = CameraController(cameras[this._cameraIndex], ResolutionPreset.veryHigh);
       controller.initialize().then((_) {
         setState(() {});
       });
@@ -44,7 +45,8 @@ class _PageCameraState extends State<PageCamera> {
           IconButton(
             icon: Icon(Icons.sync),
             onPressed: () {
-              controller = CameraController(cameras[1], ResolutionPreset.veryHigh);
+              this._cameraIndex == 0 ? this._cameraIndex = 1 : this._cameraIndex = 0;
+              controller = CameraController(cameras[this._cameraIndex], ResolutionPreset.veryHigh);
               controller.initialize().then((_) {
                 setState(() {});
               });
