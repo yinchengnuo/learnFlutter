@@ -13,7 +13,7 @@ class _PageCameraState extends State<PageCamera> {
   int _cameraIndex = 0;
   List<CameraDescription> cameras;
 
-  CameraController controller;
+  CameraController _cameraController;
 
   Future<void> initCamera() async {
     this.cameras = await availableCameras();
@@ -23,8 +23,8 @@ class _PageCameraState extends State<PageCamera> {
   void initState() {
     super.initState();
     this.initCamera().then((_) {
-      controller = CameraController(cameras[this._cameraIndex], ResolutionPreset.veryHigh);
-      controller.initialize().then((_) {
+      this._cameraController = CameraController(cameras[this._cameraIndex], ResolutionPreset.veryHigh);
+      this._cameraController.initialize().then((_) {
         setState(() {});
       });
     });
@@ -32,7 +32,7 @@ class _PageCameraState extends State<PageCamera> {
 
   @override
   void dispose() {
-    controller?.dispose();
+    this._cameraController?.dispose();
     super.dispose();
   }
 
@@ -46,8 +46,8 @@ class _PageCameraState extends State<PageCamera> {
             icon: Icon(Icons.sync),
             onPressed: () {
               this._cameraIndex == 0 ? this._cameraIndex = 1 : this._cameraIndex = 0;
-              controller = CameraController(cameras[this._cameraIndex], ResolutionPreset.veryHigh);
-              controller.initialize().then((_) {
+              this._cameraController = CameraController(cameras[this._cameraIndex], ResolutionPreset.veryHigh);
+              this._cameraController.initialize().then((_) {
                 setState(() {});
               });
             },
@@ -55,12 +55,15 @@ class _PageCameraState extends State<PageCamera> {
         ],
       ),
       body: Center(
-        child: controller == null || !controller.value.isInitialized
-            ? Container(
-                alignment: Alignment(0, 0),
-                child: CircularProgressIndicator(),
-              )
-            : CameraPreview(controller),
+        child: Container(
+          alignment: Alignment(0, 0),
+          child: this._cameraController == null || !this._cameraController.value.isInitialized
+              ? CircularProgressIndicator()
+              : AspectRatio(
+                  aspectRatio: this._cameraController.value.aspectRatio,
+                  child: CameraPreview(this._cameraController),
+                ),
+        ),
       ),
     );
   }

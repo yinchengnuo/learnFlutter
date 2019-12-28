@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../provider/ProviderApp.dart';
+import '../../../provider/ProviderApp.dart';
 import 'package:video_player/video_player.dart';
 
 class TabVideo extends StatefulWidget {
@@ -114,9 +114,8 @@ class _TabVideoState extends State<TabVideo> with AutomaticKeepAliveClientMixin 
     super.initState();
 
     Dio().get("http://yinchengnuo.com/smallvideolist?page=1").then((onValue) {
-      // 请求小视频数据
       setState(() {
-        this._swiperItems = onValue.data['data']; // 保存小视频数据
+        this._swiperItems = onValue.data['data'];
       });
       this._playVideo();
     }).catchError((onError) {

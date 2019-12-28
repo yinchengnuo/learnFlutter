@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'Tabbar.dart';
-import 'TabHome.dart';
-import 'TabLive.dart';
-import 'TabVideo.dart';
-import 'Tabwidgets.dart';
+import 'TabHome/TabHome.dart';
+import 'TabLive/TabLive.dart';
+import 'TabVideo/TabVideo.dart';
+import 'Tabwidgets/Tabwidgets.dart';
+import '../../provider/ProviderDevice.dart';
+
 
 class PageHome extends StatefulWidget {
   PageHome({Key key}) : super(key: key);
@@ -17,6 +19,8 @@ class _PageHomeState extends State<PageHome> {
 
   @override
   Widget build(BuildContext context) {
+    ProviderDevice().media = MediaQuery.of(context); // 获取屏幕适配信息
+
     return Scaffold(
       body: Stack(
         children: <Widget>[

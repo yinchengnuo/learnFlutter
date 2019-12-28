@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../provider/ProviderApp.dart';
+import '../../../provider/ProviderApp.dart';
+import '../../../provider/ProviderDevice.dart';
 
 class Tabwidgets extends StatefulWidget {
   Tabwidgets({Key key}) : super(key: key);
@@ -9,9 +10,11 @@ class Tabwidgets extends StatefulWidget {
 }
 
 class _TabwidgetsState extends State<Tabwidgets> with AutomaticKeepAliveClientMixin {
+  final double rpx = ProviderDevice().rpx;
+
   final List<Map> routerList = [
     {'name': 'Icon 图标', 'routeName': '/icon'},
-    {'name': 'Flow 瀑布流', 'routeName': '/flow'},
+    {'name': 'Flow 自定义布局', 'routeName': '/flow'},
     {'name': 'Stream 流', 'routeName': '/stream'},
     {'name': 'Camera 相机', 'routeName': '/camera'},
     {'name': 'Dio 网络请求', 'routeName': '/request'},
@@ -24,6 +27,7 @@ class _TabwidgetsState extends State<Tabwidgets> with AutomaticKeepAliveClientMi
     {'name': 'Pageview 页面容器', 'routeName': '/pageview'},
     {'name': 'Provider 状态管理', 'routeName': '/provider'},
     {'name': 'Theme 切换主题', 'routeName': '/switchtheme'},
+    {'name': 'Waterfall 瀑布流', 'routeName': '/waterfall'},
     {'name': 'Listener 手势事件', 'routeName': '/screenevent'},
   ];
 
@@ -33,8 +37,6 @@ class _TabwidgetsState extends State<Tabwidgets> with AutomaticKeepAliveClientMi
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
-    final double rpx = MediaQuery.of(context).size.width / 750;
 
     return Scaffold(
       appBar: PreferredSize(

@@ -16,7 +16,7 @@ class _PageTimeoutState extends State<PageTimeout> {
   @override
   void dispose() {
     super.dispose();
-    this._timer.cancel();
+    this._timer?.cancel();
   }
 
   @override

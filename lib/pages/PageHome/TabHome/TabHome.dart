@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../provider/ProviderApp.dart';
+import '../../../provider/ProviderApp.dart';
+import '../../../provider/ProviderDevice.dart';
 
 class TabHome extends StatefulWidget {
   TabHome({Key key}) : super(key: key);
@@ -9,6 +10,7 @@ class TabHome extends StatefulWidget {
 }
 
 class _TabHomeState extends State<TabHome> with AutomaticKeepAliveClientMixin {
+  final double rpx = ProviderDevice().rpx;
   int _counter = 0;
   void _incrementCounter() {
     setState(() => this._counter++);
@@ -20,7 +22,6 @@ class _TabHomeState extends State<TabHome> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final double rpx = MediaQuery.of(context).size.width / 750;
 
     return Scaffold(
       appBar: AppBar(

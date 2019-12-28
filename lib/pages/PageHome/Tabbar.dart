@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../provider/ProviderApp.dart';
+import '../../provider/ProviderDevice.dart';
 
 class Tabbar extends StatelessWidget {
+  final double rpx = ProviderDevice().rpx;
   final onpageChange;
   Tabbar({this.onpageChange});
 
@@ -31,7 +33,6 @@ class Tabbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double rpx = MediaQuery.of(context).size.width / 750; // 适配单位宽度
     final double iconWidth = 38 * rpx; // Icon 宽
     final Color activeColor = Theme.of(context).accentColor;
     final Color defaultColor = Theme.of(context).textTheme.button.color;

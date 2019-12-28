@@ -11,6 +11,7 @@ import '../pages/PageRequest/PageRequest.dart';
 import '../pages/PageTimeout/PageTimeout.dart';
 import '../pages/PageProvider/PageProvider.dart';
 import '../pages/PagePageview/PagePageview.dart';
+import '../pages/PageWaterfall/PageWaterfall.dart';
 import '../pages/PageAnimation/PageAnimation.dart';
 import '../pages/PageVideoplay/PageVideoplay.dart';
 import '../pages/PageContainer/PageContainer.dart';
@@ -31,6 +32,7 @@ Map routes = <String, WidgetBuilder> { // 路由表
   '/pageview': (ctx) => PagePageview(), // pgeeview 组件页面
   '/provider': (ctx) => PageProvider(), // provider 状态管理页面
   '/animation': (ctx) => PageAnimation(), // 动画页面
+  '/waterfall': (ctx) => PageWaterfall(), // 瀑布流 页面
   '/container': (ctx) => PageContainer(), // container 组件页面
   '/videoplay': (ctx) => PageVideoplay(), // 视频播放 组件页面
   '/screenevent': (ctx) => PageScreenEvent(), // 事件处理 页面
