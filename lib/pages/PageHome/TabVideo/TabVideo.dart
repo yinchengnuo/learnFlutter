@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../provider/ProviderApp.dart';
+import '../../../provider/ProviderDevice.dart';
 import 'package:video_player/video_player.dart';
 
 class TabVideo extends StatefulWidget {
@@ -13,10 +14,10 @@ class TabVideo extends StatefulWidget {
 
 class _TabVideoState extends State<TabVideo> with AutomaticKeepAliveClientMixin {
   ProviderApp _$app;
+  final double rpx = ProviderDevice().rpx;
 
   bool _isTouching = false;
   bool _isVideoLoadded = false; // vidoe 是否加载完毕
-  VideoPlayerValue _videoValue;
   VideoPlayerController _videoController; // video 控制器
 
   List _swiperItems = List();
@@ -34,21 +35,10 @@ class _TabVideoState extends State<TabVideo> with AutomaticKeepAliveClientMixin 
   void _playVideo() {
     this._videoController = VideoPlayerController.network(this._swiperItems[this._swiperNowIndex]['url']);
     this._videoController.setLooping(true);
-    // 自动切换视频
-    this._videoController.addListener(() {
-      this._videoValue = this._videoController.value;
-      this._videoController.position.then((onValue) {
-        if (this._videoValue.duration.toString().split('.')[0] == onValue.toString().split('.')[0]) {
-          this._swiperNowIndex++;
-          this._swiperActiveIndex++;
-          this._swpierController.animateToPage(this._swiperNowIndex, duration: Duration(milliseconds: 567), curve: Curves.linear).then((_) {});
-        }
-      });
-    });
 
     this._videoController.addListener(() {});
     this._videoController.initialize().then((_) {
-      if (this._$app.pageHomeTabIndex == 2) {
+      if (this._$app.pageHomeTabIndex == 2) { 
         this._videoController.play();
         setState(() {
           this._isVideoLoadded = true;
@@ -90,10 +80,12 @@ class _TabVideoState extends State<TabVideo> with AutomaticKeepAliveClientMixin 
 
   // 切换视频播放
   void _switchPlayVideo() {
-    this._isVideoLoadded = false;
-    this._videoController.dispose();
-    this._swiperNowIndex = this._swiperActiveIndex;
-    this._playVideo();
+    setState(() {
+      this._isVideoLoadded = false;
+      this._videoController.dispose();
+      this._swiperNowIndex = this._swiperActiveIndex;
+      this._playVideo();
+    });
   }
 
   @override
@@ -127,57 +119,66 @@ class _TabVideoState extends State<TabVideo> with AutomaticKeepAliveClientMixin 
   Widget build(BuildContext context) {
     super.build(context);
 
-    this._$app = Provider.of<ProviderApp>(context);
-
-    return this._swiperItems.length == 0
-        ? Container(
-            alignment: Alignment(0, 0),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage('lib/images/placeholder/douyin.jpg'),
-              fit: BoxFit.fill,
-            )),
-            child: CircularProgressIndicator(),
-          )
-        : PageView.builder(
-            controller: _swpierController,
-            scrollDirection: Axis.vertical,
-            itemCount: this._swiperItems.length,
-            onPageChanged: this._swiperChange,
-            itemBuilder: (BuildContext context, int index) {
-              return Stack(
-                children: <Widget>[
-                  Positioned.fill(
-                    child: FadeInImage.assetNetwork(
-                      placeholder: 'lib/images/placeholder/douyin.jpg',
-                      image: this._swiperItems[index]['cover'],
-                      fit: BoxFit.cover,
-                      fadeInDuration: Duration(milliseconds: 12),
-                      fadeOutDuration: Duration(milliseconds: 12),
-                    ),
+    return Scaffold(
+      body: Consumer<ProviderApp>(
+        builder: (BuildContext context, ProviderApp _$app, Widget child) {
+          this._$app = _$app;
+          return SafeArea(
+            child: this._swiperItems.length == 0
+                ? Container(
+                    alignment: Alignment(0, 0),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                      image: AssetImage('lib/images/placeholder/douyin.jpg'),
+                      fit: BoxFit.fill,
+                    )),
+                    child: CircularProgressIndicator(),
+                  )
+                : PageView.builder(
+                    controller: _swpierController,
+                    scrollDirection: Axis.vertical,
+                    itemCount: this._swiperItems.length,
+                    onPageChanged: this._swiperChange,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Stack(
+                        children: <Widget>[
+                          Positioned.fill(
+                            child: Container(
+                              color: Colors.black,
+                              alignment: Alignment(0, 0),
+                              child: FadeInImage.assetNetwork(
+                                placeholder: 'lib/images/placeholder/douyin.jpg',
+                                image: this._swiperItems[index]['cover'],
+                                fadeInDuration: Duration(milliseconds: 12),
+                                fadeOutDuration: Duration(milliseconds: 12),
+                              ),
+                            ),
+                          ),
+                          Positioned.fill(
+                            child: Listener(
+                              onPointerUp: this._onPointerUp,
+                              onPointerDown: this._onPointerDown,
+                              child: Container(
+                                alignment: Alignment(0, 0),
+                                child: index == this._swiperNowIndex
+                                    ? this._isVideoLoadded
+                                        ? AspectRatio(
+                                            aspectRatio: this._videoController.value.aspectRatio,
+                                            child: VideoPlayer(this._videoController),
+                                          )
+                                        : CircularProgressIndicator()
+                                    : CircularProgressIndicator(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
-                  Positioned.fill(
-                    child: Listener(
-                      onPointerUp: this._onPointerUp,
-                      onPointerDown: this._onPointerDown,
-                      child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        alignment: Alignment(0, 0),
-                        child: index == this._swiperNowIndex
-                            ? this._isVideoLoadded
-                                ? AspectRatio(
-                                    aspectRatio: this._videoController.value.aspectRatio,
-                                    child: VideoPlayer(this._videoController),
-                                  )
-                                : CircularProgressIndicator()
-                            : CircularProgressIndicator(),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
           );
+        },
+      ),
+      bottomNavigationBar: Container(height: ProviderApp().pageHomeTabHeight * rpx),
+    );
   }
 }

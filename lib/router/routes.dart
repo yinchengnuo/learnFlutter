@@ -17,6 +17,7 @@ import '../pages/PageVideoplay/PageVideoplay.dart';
 import '../pages/PageContainer/PageContainer.dart';
 import '../pages/PageScreenEvent/PageScreenEvent.dart';
 import '../pages/PageSwitchTheme/PageSwitchTheme.dart';
+import '../pages/PageRouteAnimation/PageRouteAnimation.dart';
 
 Map routes = <String, WidgetBuilder> { // 路由表
   '/': (ctx) => PageHome(), // app 主页
@@ -37,4 +38,5 @@ Map routes = <String, WidgetBuilder> { // 路由表
   '/videoplay': (ctx) => PageVideoplay(), // 视频播放 组件页面
   '/screenevent': (ctx) => PageScreenEvent(), // 事件处理 页面
   '/switchtheme': (ctx) => PageSwitchTheme(), // 切换主题 页面
+  '/routeAnimation': (ctx) => PageRouteAnimation(), // 路由动画 页面
 };

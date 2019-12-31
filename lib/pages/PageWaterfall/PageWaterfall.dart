@@ -33,7 +33,7 @@ class _PageWaterfallState extends State<PageWaterfall> {
             borderRadius: BorderRadius.all(Radius.circular(12)),
             child: CachedNetworkImage(
               imageUrl: this._list[index]['cover'],
-              fadeInDuration: Duration(milliseconds: 123),
+              fadeInDuration: Duration(milliseconds: 0),
               fadeOutDuration: Duration(milliseconds: 123),
               placeholder: (context, url) => Image.asset('lib/images/placeholder/loading.gif'),
               errorWidget: (context, url, error) => Image.asset('lib/images/placeholder/loading.gif'),
@@ -64,7 +64,6 @@ class _PageWaterfallState extends State<PageWaterfall> {
     Dio().get("http://yinchengnuo.com/smallvideolist?page=1").then((onValue) {
       setState(() {
         this._list = onValue.data['data'];
-        // this._list.removeRange(12, 99);
       });
     }).catchError((onError) {
       print(onError);
