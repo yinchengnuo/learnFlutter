@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
-import 'provider/ProviderApp.dart';
-import 'provider/ProviderDevice.dart';
 
 import 'router/routes.dart';
 import 'router/onUnknownRoute.dart';
@@ -24,12 +21,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     debugPaintSizeEnabled = false; // 是否进入布局调试模式
 
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ProviderApp()),
-        ChangeNotifierProvider(create: (_) => ProviderDevice())
-      ],
-      child: MaterialApp(
+    return MaterialApp(
         title: 'Flutter APP', // 在任务管理窗口中所显示的应用名字 <String>
         theme: ThemeData(
           // 应用各种 UI 所使用的主题颜色
@@ -46,7 +38,6 @@ class _AppState extends State<App> {
         ],
         supportedLocales: [const Locale('zh', 'CH')], // 使用中文语言包
         navigatorObservers: navigatorObservers, // 应用 Navigator 的监听器
-      ),
-    );
+      );
   }
 }

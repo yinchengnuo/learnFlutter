@@ -46,47 +46,49 @@ class Tabbar extends StatelessWidget {
     precacheImage(AssetImage('lib/images/pagehome/video-fill.png'), context);
     precacheImage(AssetImage('lib/images/pagehome/widget-fill.png'), context);
 
-    return Consumer<ProviderApp>(
-      builder: (BuildContext context, ProviderApp _$app, Widget child) => Container(
-        height: _$app.pageHomeTabHeight * rpx,
-        decoration: BoxDecoration(
-          border: Border(top: BorderSide(width: 1 * rpx, color: Colors.black45)),
-        ),
-        child: Row(
-          children: this
-              ._tabList
-              .map(
-                (item) => Expanded(
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () {
-                        this.onpageChange(this._tabList.indexOf(item));
-                        _$app.switchPageHomeTabIndex(this._tabList.indexOf(item));
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          ImageIcon(
-                            this._tabList.indexOf(item) == _$app.pageHomeTabIndex
-                                ? AssetImage(item['selectedIcon'])
-                                : AssetImage(item['icon']),
-                            size: iconWidth,
-                            color: this._tabList.indexOf(item) == _$app.pageHomeTabIndex ? activeColor : defaultColor,
-                          ),
-                          Text(
-                            item['title'],
-                            style: TextStyle(
-                                fontSize: 22 * rpx,
-                                color: this._tabList.indexOf(item) == _$app.pageHomeTabIndex ? activeColor : defaultColor),
-                          )
-                        ],
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProviderApp()),
+      ],
+      child: Consumer<ProviderApp>(
+        builder: (BuildContext context, ProviderApp _$app, Widget child) => Container(
+          height: _$app.pageHomeTabHeight * rpx,
+          decoration: BoxDecoration(
+            border: Border(top: BorderSide(width: 1 * rpx, color: Colors.black45)),
+          ),
+          child: Row(
+            children: this
+                ._tabList
+                .map(
+                  (item) => Expanded(
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () {
+                          this.onpageChange(this._tabList.indexOf(item));
+                          _$app.switchPageHomeTabIndex(this._tabList.indexOf(item));
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            ImageIcon(
+                              this._tabList.indexOf(item) == _$app.pageHomeTabIndex ? AssetImage(item['selectedIcon']) : AssetImage(item['icon']),
+                              size: iconWidth,
+                              color: this._tabList.indexOf(item) == _$app.pageHomeTabIndex ? activeColor : defaultColor,
+                            ),
+                            Text(
+                              item['title'],
+                              style: TextStyle(
+                                  fontSize: 22 * rpx, color: this._tabList.indexOf(item) == _$app.pageHomeTabIndex ? activeColor : defaultColor),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              )
-              .toList(),
+                )
+                .toList(),
+          ),
         ),
       ),
     );

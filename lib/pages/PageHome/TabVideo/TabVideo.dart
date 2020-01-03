@@ -38,7 +38,7 @@ class _TabVideoState extends State<TabVideo> with AutomaticKeepAliveClientMixin 
 
     this._videoController.addListener(() {});
     this._videoController.initialize().then((_) {
-      if (this._$app.pageHomeTabIndex == 2) { 
+      if (this._$app.pageHomeTabIndex == 2) {
         this._videoController.play();
         setState(() {
           this._isVideoLoadded = true;
@@ -119,66 +119,69 @@ class _TabVideoState extends State<TabVideo> with AutomaticKeepAliveClientMixin 
   Widget build(BuildContext context) {
     super.build(context);
 
-    return Scaffold(
-      body: Consumer<ProviderApp>(
-        builder: (BuildContext context, ProviderApp _$app, Widget child) {
-          this._$app = _$app;
-          return SafeArea(
-            child: this._swiperItems.length == 0
-                ? Container(
-                    alignment: Alignment(0, 0),
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                      image: AssetImage('lib/images/placeholder/douyin.jpg'),
-                      fit: BoxFit.fill,
-                    )),
-                    child: CircularProgressIndicator(),
-                  )
-                : PageView.builder(
-                    controller: _swpierController,
-                    scrollDirection: Axis.vertical,
-                    itemCount: this._swiperItems.length,
-                    onPageChanged: this._swiperChange,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Stack(
-                        children: <Widget>[
-                          Positioned.fill(
-                            child: Container(
-                              color: Colors.black,
-                              alignment: Alignment(0, 0),
-                              child: FadeInImage.assetNetwork(
-                                placeholder: 'lib/images/placeholder/douyin.jpg',
-                                image: this._swiperItems[index]['cover'],
-                                fadeInDuration: Duration(milliseconds: 12),
-                                fadeOutDuration: Duration(milliseconds: 12),
-                              ),
-                            ),
-                          ),
-                          Positioned.fill(
-                            child: Listener(
-                              onPointerUp: this._onPointerUp,
-                              onPointerDown: this._onPointerDown,
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => ProviderApp())],
+      child: Scaffold(
+        body: Consumer<ProviderApp>(
+          builder: (BuildContext context, ProviderApp _$app, Widget child) {
+            this._$app = _$app;
+            return SafeArea(
+              child: this._swiperItems.length == 0
+                  ? Container(
+                      alignment: Alignment(0, 0),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        image: AssetImage('lib/images/placeholder/douyin.jpg'),
+                        fit: BoxFit.fill,
+                      )),
+                      child: CircularProgressIndicator(),
+                    )
+                  : PageView.builder(
+                      controller: _swpierController,
+                      scrollDirection: Axis.vertical,
+                      itemCount: this._swiperItems.length,
+                      onPageChanged: this._swiperChange,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Stack(
+                          children: <Widget>[
+                            Positioned.fill(
                               child: Container(
+                                color: Colors.black,
                                 alignment: Alignment(0, 0),
-                                child: index == this._swiperNowIndex
-                                    ? this._isVideoLoadded
-                                        ? AspectRatio(
-                                            aspectRatio: this._videoController.value.aspectRatio,
-                                            child: VideoPlayer(this._videoController),
-                                          )
-                                        : CircularProgressIndicator()
-                                    : CircularProgressIndicator(),
+                                child: FadeInImage.assetNetwork(
+                                  placeholder: 'lib/images/placeholder/douyin.jpg',
+                                  image: this._swiperItems[index]['cover'],
+                                  fadeInDuration: Duration(milliseconds: 12),
+                                  fadeOutDuration: Duration(milliseconds: 12),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-          );
-        },
+                            Positioned.fill(
+                              child: Listener(
+                                onPointerUp: this._onPointerUp,
+                                onPointerDown: this._onPointerDown,
+                                child: Container(
+                                  alignment: Alignment(0, 0),
+                                  child: index == this._swiperNowIndex
+                                      ? this._isVideoLoadded
+                                          ? AspectRatio(
+                                              aspectRatio: this._videoController.value.aspectRatio,
+                                              child: VideoPlayer(this._videoController),
+                                            )
+                                          : CircularProgressIndicator()
+                                      : CircularProgressIndicator(),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+            );
+          },
+        ),
+        bottomNavigationBar: Container(height: ProviderApp().pageHomeTabHeight * rpx),
       ),
-      bottomNavigationBar: Container(height: ProviderApp().pageHomeTabHeight * rpx),
     );
   }
 }

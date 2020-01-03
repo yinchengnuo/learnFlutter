@@ -11,6 +11,7 @@ class PageCamera extends StatefulWidget {
 
 class _PageCameraState extends State<PageCamera> {
   int _cameraIndex = 0;
+  get isCameraInited => this._cameraController == null || !this._cameraController.value.isInitialized;
   List<CameraDescription> cameras;
 
   CameraController _cameraController;
@@ -38,31 +39,45 @@ class _PageCameraState extends State<PageCamera> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final deviceRatio = size.width / size.height;
+    print('d$deviceRatio');
     return Scaffold(
-      appBar: AppBar(
-        title: Text('相机'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.sync),
-            onPressed: () {
-              this._cameraIndex == 0 ? this._cameraIndex = 1 : this._cameraIndex = 0;
-              this._cameraController = CameraController(cameras[this._cameraIndex], ResolutionPreset.veryHigh);
-              this._cameraController.initialize().then((_) {
-                setState(() {});
-              });
-            },
-          )
-        ],
-      ),
-      body: Center(
-        child: Container(
-          alignment: Alignment(0, 0),
-          child: this._cameraController == null || !this._cameraController.value.isInitialized
-              ? CircularProgressIndicator()
-              : AspectRatio(
-                  aspectRatio: this._cameraController.value.aspectRatio,
-                  child: CameraPreview(this._cameraController),
-                ),
+      body: SafeArea(
+        child: Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            Transform.scale(
+              scale: this.isCameraInited ? 1 : this._cameraController.value.aspectRatio / deviceRatio,
+              child: Center(
+                child: this.isCameraInited
+                    ? CircularProgressIndicator()
+                    : AspectRatio(
+                        aspectRatio: this._cameraController.value.aspectRatio,
+                        child: CameraPreview(this._cameraController),
+                      ),
+              ),
+            ),
+            Container(
+              child: AppBar(
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+                title: Text('相机'),
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.sync),
+                    onPressed: () {
+                      this._cameraIndex == 0 ? this._cameraIndex = 1 : this._cameraIndex = 0;
+                      this._cameraController = CameraController(cameras[this._cameraIndex], ResolutionPreset.veryHigh);
+                      this._cameraController.initialize().then((_) {
+                        setState(() {});
+                      });
+                    },
+                  )
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

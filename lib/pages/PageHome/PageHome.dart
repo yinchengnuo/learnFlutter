@@ -35,6 +35,7 @@ class _PageHomeState extends State<PageHome> {
             alignment: Alignment.bottomCenter,
             child: Tabbar(
               onpageChange: (index) {
+                // this._pageController.animateToPage(index, duration: Duration(milliseconds: 123), curve: Curves.linear);
                 this._pageController.jumpToPage(index);
               },
             ),
