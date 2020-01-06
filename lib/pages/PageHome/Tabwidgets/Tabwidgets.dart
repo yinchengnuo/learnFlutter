@@ -31,6 +31,7 @@ class _TabwidgetsState extends State<Tabwidgets> with AutomaticKeepAliveClientMi
     {'name': 'Waterfall 瀑布流', 'routeName': '/waterfall'},
     {'name': 'Listener 手势事件', 'routeName': '/screenevent'},
     {'name': 'RouteAnimation 路由动画', 'routeName': PageRouteAnimation()},
+    {'name': 'BottomNavigationBar 自定义底部导航栏', 'routeName': '/custom'},
   ];
 
   @override
@@ -45,7 +46,7 @@ class _TabwidgetsState extends State<Tabwidgets> with AutomaticKeepAliveClientMi
         child: AppBar(
           title: Text('Flutter 组件列表'),
         ),
-        preferredSize: Size.fromHeight(128 * rpx),
+        preferredSize: Size.fromHeight(98 * rpx),
       ),
       body: SingleChildScrollView(
         child: Wrap(
@@ -117,17 +118,12 @@ class CustomRoute extends PageRouteBuilder {
 
               // 旋转加缩放动画效果
               return RotationTransition(
-                turns: Tween(begin: 0.0,end: 1.0)
-                .animate(CurvedAnimation(
+                turns: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
                   parent: animaton1,
                   curve: Curves.fastOutSlowIn,
                 )),
                 child: ScaleTransition(
-                  scale: Tween(begin: 0.0,end: 1.0)
-                  .animate(CurvedAnimation(
-                    parent: animaton1,
-                    curve: Curves.fastOutSlowIn
-                  )),
+                  scale: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(parent: animaton1, curve: Curves.fastOutSlowIn)),
                   child: child,
                 ),
               );
