@@ -20,9 +20,8 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     debugPaintSizeEnabled = false; // 是否进入布局调试模式
-
     return MaterialApp(
-        title: 'Flutter APP', // 在任务管理窗口中所显示的应用名字 <String>
+        title: 'Flutter 学习', // 在任务管理窗口中所显示的应用名字 <String>
         theme: ThemeData(
           // 应用各种 UI 所使用的主题颜色
           primarySwatch: Colors.blue,
@@ -40,4 +39,7 @@ class _AppState extends State<App> {
         navigatorObservers: navigatorObservers, // 应用 Navigator 的监听器
       );
   }
+}
+
+class SystemChrome {
 }

@@ -1,6 +1,12 @@
+import 'dart:io';
 import 'dart:async';
+import 'dart:typed_data';
+import 'package:uuid/uuid.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart' as Path;
+import 'package:path_provider/path_provider.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class PageCamera extends StatefulWidget {
   PageCamera({Key key}) : super(key: key);
@@ -10,6 +16,7 @@ class PageCamera extends StatefulWidget {
 }
 
 class _PageCameraState extends State<PageCamera> {
+  Uint8List _image;
   int _cameraIndex = 1;
   get isCameraInited => this._cameraController == null || !this._cameraController.value.isInitialized;
   List<CameraDescription> cameras;
@@ -40,7 +47,6 @@ class _PageCameraState extends State<PageCamera> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    print(MediaQuery.of(context));
     final deviceRatio = size.width / size.height;
     return Scaffold(
       body: Column(
@@ -77,16 +83,14 @@ class _PageCameraState extends State<PageCamera> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          IconButton(
-                            icon: Icon(Icons.arrow_back),
-                            color: Colors.white,
+                          FlatButton(
+                            child: Icon(Icons.arrow_back, color: Colors.white),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
                           ),
-                          IconButton(
-                            icon: Icon(Icons.sync),
-                            color: Colors.white,
+                          FlatButton(
+                            child: Icon(Icons.sync, color: Colors.white),
                             onPressed: () {
                               this._cameraIndex == 0 ? this._cameraIndex = 1 : this._cameraIndex = 0;
                               this._cameraController = CameraController(cameras[this._cameraIndex], ResolutionPreset.veryHigh);
@@ -97,6 +101,50 @@ class _PageCameraState extends State<PageCamera> {
                           ),
                         ],
                       ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    height: 123,
+                    child: Container(
+                      color: Colors.transparent,
+                      alignment: Alignment.center,
+                      child: Container(
+                        width: 66,
+                        height: 66,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(123)), color: Colors.red),
+                        child: FlatButton(
+                          child: null,
+                          onPressed: () async {
+                            final String tempPath = Path.join((await getTemporaryDirectory()).path, '${Uuid().v4().toString()}.png');
+                            this._cameraController.takePicture(tempPath).then((_) async {
+                              setState(() {
+                                this._image = File(tempPath).readAsBytesSync();
+                              });
+                              await ImageGallerySaver.saveImage(this._image);
+                              await File(tempPath).delete();
+                              Future.delayed(Duration(seconds: 5)).then((_) {
+                                setState(() {
+                                this._image = null;
+                              });
+                              });
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 123,
+                    right: 0,
+                    width: 123,
+                    height: 234,
+                    child: Container(
+                      color: Colors.transparent,
+                      alignment: Alignment.center,
+                      child: _image == null ? null : Image.memory(_image),
                     ),
                   ),
                 ],
