@@ -21,25 +21,18 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     debugPaintSizeEnabled = false; // 是否进入布局调试模式
     return MaterialApp(
-        title: 'Flutter 学习', // 在任务管理窗口中所显示的应用名字 <String>
-        theme: ThemeData(
-          // 应用各种 UI 所使用的主题颜色
-          primarySwatch: Colors.blue,
-        ),
-        routes: routes, // 路由表
-        initialRoute: '/', // 首页路由
-        onUnknownRoute: onUnknownRoute, // 未知路由处理方法
-        onGenerateRoute: onGenerateRoute, // 全局路由守卫，用于使用命名路由时传参
-        debugShowCheckedModeBanner: false, // 不显示 debug 图标
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: [const Locale('zh', 'CH')], // 使用中文语言包
-        navigatorObservers: navigatorObservers, // 应用 Navigator 的监听器
-      );
+      title: 'Flutter 学习', // 在任务管理窗口中所显示的应用名字 <String>
+      theme: ThemeData(primarySwatch: Colors.blue),
+      routes: routes, // 路由表
+      initialRoute: '/', // 首页路由
+      onUnknownRoute: onUnknownRoute, // 未知路由处理方法
+      onGenerateRoute: onGenerateRoute, // 全局路由守卫，用于使用命名路由时传参
+      navigatorObservers: navigatorObservers, // 应用 Navigator 的监听器
+      debugShowCheckedModeBanner: false, // 不显示 debug 图标
+      localizationsDelegates: [GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate],
+      supportedLocales: [const Locale('zh', 'CH')], // 使用中文语言包
+    );
   }
 }
 
-class SystemChrome {
-}
+class SystemChrome {}

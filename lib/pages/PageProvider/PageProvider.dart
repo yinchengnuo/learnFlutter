@@ -31,50 +31,56 @@ class _PageProviderState extends State<PageProvider> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Provider 状态管理'),
-      ),
-      body: Consumer2<ProviderApp, ProviderDevice>(
-        builder: (BuildContext context, ProviderApp _$app, ProviderDevice _$device, Widget child) {
-          this._$app = _$app;
-          this._$device = _$device;
-          return PageView(
-            children: this._pageList,
-            controller: this._pageController,
-            physics: NeverScrollableScrollPhysics(),
-          );
-        },
-      ),
-      bottomNavigationBar: Consumer<ProviderApp>(
-        builder: (BuildContext context, ProviderApp _$app, Widget child) {
-          return BottomNavigationBar(
-            currentIndex: _$app.pageProviderTabIndex,
-            onTap: (index) {
-              this._pageController.jumpToPage(index);
-              _$app.switchPageProviderTabIndex(index);
-            },
-            type: BottomNavigationBarType.fixed,
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                title: Text('首页'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.change_history),
-                title: Text('频道'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.fast_forward),
-                title: Text('动态'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.battery_alert),
-                title: Text('周边'),
-              ),
-            ],
-          );
-        },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProviderApp()),
+        ChangeNotifierProvider(create: (_) => ProviderDevice()),
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Provider 状态管理'),
+        ),
+        body: Consumer2<ProviderApp, ProviderDevice>(
+          builder: (BuildContext context, ProviderApp _$app, ProviderDevice _$device, Widget child) {
+            this._$app = _$app;
+            this._$device = _$device;
+            return PageView(
+              children: this._pageList,
+              controller: this._pageController,
+              physics: NeverScrollableScrollPhysics(),
+            );
+          },
+        ),
+        bottomNavigationBar: Consumer<ProviderApp>(
+          builder: (BuildContext context, ProviderApp _$app, Widget child) {
+            return BottomNavigationBar(
+              currentIndex: _$app.pageProviderTabIndex,
+              onTap: (index) {
+                this._pageController.jumpToPage(index);
+                _$app.switchPageProviderTabIndex(index);
+              },
+              type: BottomNavigationBarType.fixed,
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  title: Text('首页'),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.change_history),
+                  title: Text('频道'),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.fast_forward),
+                  title: Text('动态'),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.battery_alert),
+                  title: Text('周边'),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

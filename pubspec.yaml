@@ -22,7 +22,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_swiper : ^1.1.6
-  video_player: ^0.10.5
+  video_player: ^0.10.4
   provider: ^3.2.0
   dio: ^3.0.7
   camera: ^0.5.7+2

@@ -118,17 +118,18 @@ class _PageCameraState extends State<PageCamera> {
                         child: FlatButton(
                           child: null,
                           onPressed: () async {
-                            final String tempPath = Path.join((await getTemporaryDirectory()).path, '${Uuid().v4().toString()}.png');
+                            String tempPath = Path.join((await getTemporaryDirectory()).path, '${Uuid().v4().toString()}.png');
                             this._cameraController.takePicture(tempPath).then((_) async {
                               setState(() {
                                 this._image = File(tempPath).readAsBytesSync();
+                                print(this._image.length);
                               });
                               await ImageGallerySaver.saveImage(this._image);
                               await File(tempPath).delete();
                               Future.delayed(Duration(seconds: 5)).then((_) {
                                 setState(() {
-                                this._image = null;
-                              });
+                                  this._image = null;
+                                });
                               });
                             });
                           },
